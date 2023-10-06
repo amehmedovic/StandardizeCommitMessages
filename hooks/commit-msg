@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Commit message is defined by RegEx
+# Message must start with "feature|fix|refactor|wip" followed by colon and description size between 1 and 50 cahrs
+commit_msg_format="^(feature|fix|refactor|wip):.{1,50}$"
+
+# Get commit msg
+commit_msg=$(cat "$1")
+
+# Check commit msg format
+if ! [[ $commit_msg =~ $commit_msg_format ]]; then
+  echo "Commit message does not meet criteria! Use \"<type>: <description> (max 50 characters)\" instead."
+  exit 1
+fi
